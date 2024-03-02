@@ -7,7 +7,6 @@ mongoose.connect(process.env.DATABASE).then(() => {
 });
 
 const Port = process.env.PORT || 3000;
-console.log('Hi');
 
 app.listen(Port, () => {
     console.log('App Running Now.');
