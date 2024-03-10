@@ -9,6 +9,7 @@ process.on('uncaughtException', (err) => {
 
 const app = require('./app');
 
+
 mongoose.connect(process.env.DATABASE).then(() => {
     console.log('Connected Successfully.');
 });
