@@ -14,6 +14,7 @@ const loginForm = document.querySelector('.form--login');
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         login({ email, password });
@@ -29,9 +30,12 @@ const userDataForm = document.querySelector('.form-user-data');
 if (userDataForm) {
     userDataForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        await updateSettings({ name, email }, 'data');
+        const form = new FormData();
+        form.append("name", document.getElementById('name').value);
+        form.append("email", document.getElementById('email').value);
+        form.append("photo", document.getElementById('photo').files[0]);
+
+        await updateSettings(form, 'data');
     });
 }
 
