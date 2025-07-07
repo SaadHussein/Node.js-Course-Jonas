@@ -5674,7 +5674,6 @@ parcelHelpers.export(exports, "bookTour", ()=>bookTour);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alerts = require("./alerts");
-const stripe = Stripe('pk_test_51RUDZRQ4LosksAJErhVRHiHGzK79x3uU4JmmcGLyE64Jn9u8DZjVy6YQXI4rFgEemCghWnFbkGj3MtBGXjMRqyxy00M0uUEjKX');
 const bookTour = async (tourId)=>{
     try {
         const session = await (0, _axiosDefault.default)(`/api/v1/bookings/checkout-session/${tourId}`);
