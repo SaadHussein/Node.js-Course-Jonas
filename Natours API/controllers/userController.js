@@ -67,8 +67,7 @@ const createUser = (req, res) => {
 };
 
 const updateMe = catchAsync(async (req, res, next) => {
-    console.log(req.file);
-    console.log(req.body);
+
 
     if (req.body.password || req.body.passwordConfirm) {
         return next(new AppError('This Route is Not For Password, Please use /updateMyPassword Route.', 400));

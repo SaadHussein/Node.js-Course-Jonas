@@ -7,7 +7,6 @@ const handleCastErrorDB = (err) => {
 
 const handleDuplicateFieldDB = (err) => {
     // const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0]; //To Match Any String Between Qoutes.
-    // console.log(value);
     const value = Object.values(err.keyValue)[0];
     const message = `Duplicate Field Value: ${value}, Please Use Another Value`;
     return new AppError(message, 400);

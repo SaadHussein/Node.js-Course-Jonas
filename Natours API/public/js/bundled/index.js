@@ -716,15 +716,11 @@ if (userPasswordForm) userPasswordForm.addEventListener('submit', async (e)=>{
     document.getElementById('password-confirm').value = '';
 });
 const bookBtn = document.getElementById('book-tour');
-console.log(bookBtn);
-if (bookBtn) {
-    console.log('Saad');
-    bookBtn.addEventListener('click', (e)=>{
-        e.target.textContent = 'Processing...';
-        const { tourId } = e.target.dataset;
-        (0, _stripe.bookTour)(tourId);
-    });
-}
+if (bookBtn) bookBtn.addEventListener('click', (e)=>{
+    e.target.textContent = 'Processing...';
+    const { tourId } = e.target.dataset;
+    (0, _stripe.bookTour)(tourId);
+});
 
 },{"./login":"7yHem","./mapbox":"3zDlz","./updateSettings":"l3cGY","./stripe":"10tSC","@babel/polyfill":"dTCHC"}],"7yHem":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -738,7 +734,7 @@ const login = async (data)=>{
     try {
         const result = await (0, _axiosDefault.default)({
             method: "POST",
-            url: "http://localhost:3000/api/v1/users/login",
+            url: "/api/v1/users/login",
             data: {
                 email: data.email,
                 password: data.password
@@ -754,13 +750,10 @@ const login = async (data)=>{
 };
 const logout = async ()=>{
     try {
-        console.log('Hiiii');
         const res = await (0, _axiosDefault.default)({
             method: "GET",
-            url: "http://localhost:3000/api/v1/users/logout"
+            url: "/api/v1/users/logout"
         });
-        console.log('Hiiii');
-        console.log(res);
         if (res.data.status === 'success') location.reload(true);
     } catch (err) {
         (0, _alerts.showAlert)("error", "Error while Logout, Try again Later.");
@@ -5662,7 +5655,7 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alerts = require("./alerts");
 const updateSettings = async (data, type)=>{
     try {
-        const url = type === 'password' ? "http://localhost:3000/api/v1/users/updateMyPassword" : "http://localhost:3000/api/v1/users/updateMe";
+        const url = type === 'password' ? "/api/v1/users/updateMyPassword" : "/api/v1/users/updateMe";
         const res = await (0, _axiosDefault.default)({
             method: "PATCH",
             url,
@@ -5684,18 +5677,17 @@ var _alerts = require("./alerts");
 const stripe = Stripe('pk_test_51RUDZRQ4LosksAJErhVRHiHGzK79x3uU4JmmcGLyE64Jn9u8DZjVy6YQXI4rFgEemCghWnFbkGj3MtBGXjMRqyxy00M0uUEjKX');
 const bookTour = async (tourId)=>{
     try {
-        const session1 = await (0, _axiosDefault.default)(`http://localhost:3000/api/v1/bookings/checkout-session/${tourId}`);
+        const session = await (0, _axiosDefault.default)(`/api/v1/bookings/checkout-session/${tourId}`);
         await stripe.redirectToCheckout({
-            sessionId: session1.data.session.id
+            sessionId: session.data.session.id
         });
     } catch (err) {
         console.log(err);
         (0, _alerts.showAlert)("error", err);
     }
-    console.log(session);
 };
 
-},{"axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./alerts":"6Mcnf"}],"dTCHC":[function(require,module,exports,__globalThis) {
+},{"axios":"jo6P5","./alerts":"6Mcnf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dTCHC":[function(require,module,exports,__globalThis) {
 "use strict";
 require("f50de0aa433a589b");
 var _global = _interopRequireDefault(require("4142986752a079d4"));

@@ -58,9 +58,7 @@ if (userPasswordForm) {
 }
 
 const bookBtn = document.getElementById('book-tour');
-console.log(bookBtn)
 if (bookBtn) {
-    console.log('Saad')
     bookBtn.addEventListener('click', e => {
         e.target.textContent = 'Processing...';
         const { tourId } = e.target.dataset;
