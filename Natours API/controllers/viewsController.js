@@ -67,11 +67,21 @@ const updateUserData = catchAsync(async (req, res, next) => {
     });
 });
 
+const alerts = (req, res, next) => {
+    const alert = req.query.alert;
+
+    if (alert === 'booking') {
+        res.locals.alert = 'Your Booking was Successful! Please Check Your Email for Confirmation. If Your Booking Does Not Appear Here Immediately, Please Come Back Later.';
+    }
+    next();
+}
+
 module.exports = {
     getOverview,
     getTour,
     getAccount,
     getLoginForm,
     updateUserData,
-    getMyTours
+    getMyTours,
+    alerts
 };

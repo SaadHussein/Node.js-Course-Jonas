@@ -3,6 +3,7 @@ import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import "@babel/polyfill";
+import showAlert from './alerts';
 
 const map = document.getElementById('map');
 if (map) {
@@ -64,4 +65,9 @@ if (bookBtn) {
         const { tourId } = e.target.dataset;
         bookTour(tourId);
     });
+}
+
+const alertMessage = document.querySelector('body').dataset.alert;
+if (alertMessage) {
+    showAlert('success', alertMessage, 20);
 }
