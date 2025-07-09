@@ -723,6 +723,8 @@ if (bookBtn) bookBtn.addEventListener('click', (e)=>{
     const { tourId } = e.target.dataset;
     (0, _stripe.bookTour)(tourId);
 });
+const alertMessage = document.querySelector('body').dataset.alert;
+if (alertMessage) (0, _alertsDefault.default)('success', alertMessage, 20);
 
 },{"./login":"hXszI","./mapbox":"bC7WV","./updateSettings":"fwgbI","./stripe":"5JHCR","@babel/polyfill":"@babel/polyfill","./alerts":"kfYcR","@parcel/transformer-js/src/esmodule-helpers.js":"3Hx7W"}],"hXszI":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -771,13 +773,13 @@ const hideAlert = ()=>{
     const el = document.querySelector('.alert');
     if (el) el.parentElement.removeChild(el);
 };
-const showAlert = (type, msg)=>{
+const showAlert = (type, msg, time = 7)=>{
     hideAlert();
     const markup = `<div class="alert alert--${type}">${msg}</div>`;
     document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
     setTimeout(()=>{
         hideAlert();
-    }, 5000);
+    }, time * 1000);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"3Hx7W"}],"3Hx7W":[function(require,module,exports,__globalThis) {
@@ -899,8 +901,7 @@ parcelHelpers.export(exports, "bookTour", ()=>bookTour);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alerts = require("./alerts");
-// const stripe = Stripe('Add your Stripe public key here');
-const stripe = Stripe('pk_test_51RUDZRQ4LosksAJErhVRHiHGzK79x3uU4JmmcGLyE64Jn9u8DZjVy6YQXI4rFgEemCghWnFbkGj3MtBGXjMRqyxy00M0uUEjKX');
+const stripe = Stripe('Add your Stripe public key here');
 const bookTour = async (tourId)=>{
     try {
         const session = await (0, _axiosDefault.default)(`/api/v1/bookings/checkout-session/${tourId}`);
